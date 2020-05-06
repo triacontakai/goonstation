@@ -7,6 +7,7 @@ IMPLANT CASE
 IMPLANT PAD
 IMPLANT GUN
 THROWING DARTS
+HEALTH IMPLANT TRACKER
 */
 /* ================================================================== */
 /* ------------------------- Implant Parent ------------------------- */
@@ -144,7 +145,6 @@ THROWING DARTS
 	icon_state = "implant-b"
 	impcolor = "b"
 	//life_tick_energy = 0.1
-	var/healthstring = ""
 
 	var/message = null
 	var/mailgroup = "medbay"
@@ -170,16 +170,18 @@ THROWING DARTS
 			JOB_XP(I, "Medical Doctor", 5)
 
 	proc/sensehealth()
+		var/healthstring
+
 		if (!src.implanted)
 			return "ERROR"
 		else
 			var/mob/living/L
 			if (isliving(src.owner))
 				L = src.owner
-				src.healthstring = "[round(L.get_oxygen_deprivation())] - [round(L.get_toxin_damage())] - [round(L.get_burn_damage())] - [round(L.get_brute_damage())] | OXY-TOX-BURN-BRUTE"
-			if (!src.healthstring)
-				src.healthstring = "ERROR"
-			return src.healthstring
+				healthstring = "[round(L.get_oxygen_deprivation())] - [round(L.get_toxin_damage())] - [round(L.get_burn_damage())] - [round(L.get_brute_damage())] | OXY-TOX-BURN-BRUTE"
+			if (!healthstring)
+				healthstring = "ERROR"
+			return healthstring
 
 	// add gps info proc here if tracker exists
 
@@ -201,6 +203,7 @@ THROWING DARTS
 		var/mob/living/carbon/human/H = src.owner
 		H.mini_health_hud = 0
 		H.show_text("You feel less in-tune with your body.", "red")
+		update_record(H, "No health implant detected.") // set back to default value
 
 	on_life(var/mult = 1)
 		if (!ishuman(src.owner))
@@ -209,13 +212,7 @@ THROWING DARTS
 		if (!H.mini_health_hud)
 			H.mini_health_hud = 1
 
-		var/datum/data/record/probably_my_record = null
-		for (var/datum/data/record/R in data_core.medical)
-			if (R.fields["name"] == H.real_name)
-				probably_my_record = R
-				break
-		if (probably_my_record)
-			probably_my_record.fields["h_imp"] = "[src.sensehealth()]"
+		update_record(H, src.sensehealth())
 		..()
 
 	on_crit()
@@ -231,6 +228,16 @@ THROWING DARTS
 		DEBUG_MESSAGE("[src] calling to report death")
 		death_alert()
 		..()
+
+	// updates health record of implant's user with whatever message is passed in
+	proc/update_record(mob/living/carbon/human/H, var/msg)
+		var/datum/data/record/probably_my_record = null
+		for (var/datum/data/record/R in data_core.medical)
+			if (R.fields["name"] == H.real_name)
+				probably_my_record = R
+				break
+		if (probably_my_record)
+			probably_my_record.fields["h_imp"] = msg
 
 //	on_remove(var/mob/living/carbon/human/H)
 //		..()
