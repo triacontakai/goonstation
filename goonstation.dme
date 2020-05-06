@@ -50,6 +50,7 @@ var/datum/preMapLoad/preMapLoad = new
 #include "code\__secret.dm"
 
 // BEGIN_INCLUDE
+#include "_stdlib\movement_modifiers.dm"
 #include "code\area.dm"
 #include "code\atom.dm"
 #include "code\base_lighting.dm"

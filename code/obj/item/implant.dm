@@ -212,17 +212,7 @@ HEALTH IMPLANT TRACKER
 		if (!H.mini_health_hud)
 			H.mini_health_hud = 1
 
-<<<<<<< HEAD
 		update_record(H, src.sensehealth())
-=======
-		var/datum/data/record/probably_my_record = null
-		for (var/datum/data/record/R in data_core.medical)
-			if (R.fields["name"] == H.real_name)
-				probably_my_record = R
-				break
-		if (probably_my_record)
-			probably_my_record.fields["h_imp"] = "[src.sensehealth()]"
->>>>>>> master
 		..()
 
 	on_crit()
