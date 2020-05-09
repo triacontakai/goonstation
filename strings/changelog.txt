@@ -1,5 +1,36 @@
 
+(t)fri may 08 20
+(u)Sovexe
+(p)624
+(e)🆕|enhancement
+(+)Clicking an airlock that you don't have permission to open with the help intent will now cause you to knock on the door
+(u)Tarmunora
+(p)605
+(e)🍑|ass-jam
+(+)ASS JAM: Changed pulse to pullse
+(u)glassofmilk
+(p)597
+(e)🆕|enhancement
+(+)Changed to allow more configuration for guardbuddy and navbeacon settings
+(t)thu may 07 20
+(u)Kubius
+(p)614
+(e)🆕🗺|enhancement, mapping
+(+)Kondaru fix batch seventeen: mainly the engine again.
+(u)glassofmilk
+(p)529
+(e)🆕🎨|enhancement, sprites
+(*)Added a Radio Scanner Component to the MechComp Dispenser. It can monitor voice radio channels and output a packet accordingly.
+(u)Kyle
+(p)606
+(e)🆕|enhancement
+(*)Added Clown Job XP and Rewards. Get it from doing Clown things.
 (t)wed may 06 20
+(u)Carbadox
+(p)573
+(e)🆕|enhancement
+(+)Removed Port-a-brig from Security Equipment Crate and moved it to it's own seperate purchase
+(+)Added general Security gear like belt, helmet and vest in place of the Brig
 (u)Naksu
 (p)576
 (e)|
